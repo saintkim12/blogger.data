@@ -55,7 +55,6 @@ function BloggerData(o) {
     link.href = url;
     document.getElementsByTagName("head")[0].appendChild(link);
   }
-  
   const BloggerData = {
     init: function(o) {
       const css = { ...option.css, ...Object(o).css }
@@ -63,7 +62,7 @@ function BloggerData(o) {
       const _fn = Object(o).fn
       Object.values(css).forEach(requirecss)
       return loadScript('https://unpkg.com/requirejs@2.3.6/require.js').then(function() {
-        const { requirejs, require } = window
+        const { requirejs } = window
         requirejs.config({
           paths: {
             react: 'https://unpkg.com/react@17/umd/react.production.min',
@@ -80,9 +79,13 @@ function BloggerData(o) {
       })
     },
     getReact: function() {
+      return BloggerData.getLibs({ 'react': 'React', 'react-dom': 'ReactDOM' })
+    },
+    getLibs: function(nameAndKey) {
+      const { require } = window
       return new Promise(function(resolve, reject) {
-        require(['react', 'react-dom'], function(React, ReactDOM) {
-          resolve({ React, ReactDOM })
+        require(Object.keys(nameAndKey), function(libs) {
+          resolve(Object.values(nameAndKey).reduce((obj, key, i) => ({ ...obj, [key]: libs[i] }), {}))
         }, reject)
       })
     }
