@@ -1,0 +1,23 @@
+{
+  "name": "blogger.data",
+  "version": "1.0.0",
+  "description": "\"# blogger.data\"",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^7.20.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saintkim12/blogger.data.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saintkim12/blogger.data/issues"
+  },
+  "homepage": "https://github.com/saintkim12/blogger.data#readme"
+}
