@@ -84,7 +84,7 @@ function BloggerData(o) {
     getLibs: function(nameAndKey) {
       const { require } = window
       return new Promise(function(resolve, reject) {
-        require(Object.keys(nameAndKey), function(libs) {
+        require(Object.keys(nameAndKey), function(...libs) {
           resolve(Object.values(nameAndKey).reduce((obj, key, i) => ({ ...obj, [key]: libs[i] }), {}))
         }, reject)
       })
