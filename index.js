@@ -45,10 +45,23 @@ function BloggerData(o) {
       resolve()
     })
   }
+  // eslint-disable-next-line no-unused-vars
+  let requirecss = function (url) {
+    // 중복실행 방지
+    if (document.querySelectorAll('link[type="text/css"][rel="stylesheet"][href="' + url + '"]').length) return
+    var link = document.createElement("link");
+    link.type = "text/css";
+    link.rel = "stylesheet";
+    link.href = url;
+    document.getElementsByTagName("head")[0].appendChild(link);
+  }
+  
   const BloggerData = {
     init: function(o) {
+      const css = { ...option.css, ...Object(o).css }
       const libs = { ...option.libs, ...Object(o).libs }
       const _fn = Object(o).fn
+      Object.values(css).forEach(requirecss)
       return loadScript('https://unpkg.com/requirejs@2.3.6/require.js').then(function() {
         const { requirejs, require } = window
         requirejs.config({
