@@ -1,6 +1,7 @@
 'use strict'
 // eslint-disable-next-line no-unused-vars
-function BloggerData() {
+function BloggerData(o) {
+  const option = Object(o)
   // from https://github.com/tserkov/vue-plugin-load-script/blob/master/index.js
   let loadScript = function (src) {
     return new Promise(function (resolve, reject) {
@@ -46,22 +47,30 @@ function BloggerData() {
   }
   const BloggerData = {
     init: function(o) {
-      // const libs = Object(o).libs
+      const libs = { ...option.libs, ...Object(o).libs }
       const _fn = Object(o).fn
       return loadScript('https://unpkg.com/requirejs@2.3.6/require.js').then(function() {
         const { requirejs, require } = window
         requirejs.config({
           paths: {
             react: 'https://unpkg.com/react@17/umd/react.production.min',
-            'react-dom': 'https://unpkg.com/react-dom@17/umd/react-dom.production.min'
+            'react-dom': 'https://unpkg.com/react-dom@17/umd/react-dom.production.min',
+            ...libs
           }
         })
-        require(['react', 'react-dom'], function(React, ReactDOM) {
-          // console.log('React', React)
-          // console.log('ReactDOM', ReactDOM)
+        return BloggerData.getReact().then(function({ React, ReactDOM }) {
+          console.log('React', React)
+          console.log('ReactDOM', ReactDOM)
           const fn = typeof _fn === 'function' ? _fn : function() {}
-          fn({ React, ReactDOM })
+          return fn({ React, ReactDOM })
         })
+      })
+    },
+    getReact: function() {
+      return new Promise(function(resolve, reject) {
+        require(['react', 'react-dom'], function(React, ReactDOM) {
+          resolve({ React, ReactDOM })
+        }, reject)
       })
     }
   }
