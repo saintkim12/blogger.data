@@ -65,8 +65,10 @@ function BloggerData(o) {
         const { requirejs } = window
         requirejs.config({
           paths: {
-            react: 'https://unpkg.com/react@17/umd/react.production.min',
-            'react-dom': 'https://unpkg.com/react-dom@17/umd/react-dom.production.min',
+            // react: 'https://unpkg.com/react@17/umd/react.production.min',
+            react: 'https://unpkg.com/react@17/umd/react.development',
+            // 'react-dom': 'https://unpkg.com/react-dom@17/umd/react-dom.production.min',
+            'react-dom': 'https://unpkg.com/react-dom@17/umd/react-dom.development',
             ...libs
           }
         })
