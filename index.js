@@ -70,6 +70,18 @@ function BloggerData(o) {
             // 'react-dom': 'https://unpkg.com/react-dom@17/umd/react-dom.production.min',
             'react-dom': 'https://unpkg.com/react-dom@17/umd/react-dom.development',
             ...libs
+          },
+          // https://stackoverflow.com/a/49232147
+          attributes: {
+            react: { crossorigin: 'anonymous' },
+            'react-dom': { crossorigin: 'anonymous' }
+          },
+          onNodeCreated: function(node, config, name){
+            if(config.attributes && config.attributes[name]){
+              Object.keys(config.attributes[name]).forEach(attribute => {
+                node.setAttribute(attribute, config.attributes[name][attribute]);
+              });
+            }
           }
         })
         return BloggerData.getReact().then(function({ React, ReactDOM }) {
