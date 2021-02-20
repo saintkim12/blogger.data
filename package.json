@@ -8,6 +8,7 @@
     "eslint": "^7.20.0"
   },
   "scripts": {
+    "publish": "surge ./ bloggerdata.surge.sh",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

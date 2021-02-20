@@ -65,6 +65,7 @@ function BloggerData(o) {
         const { requirejs } = window
         requirejs.config({
           paths: {
+            'lodash': 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.20/lodash.min',
             // react: 'https://unpkg.com/react@17/umd/react.production.min',
             react: 'https://unpkg.com/react@17/umd/react.development',
             // 'react-dom': 'https://unpkg.com/react-dom@17/umd/react-dom.production.min',
@@ -85,8 +86,6 @@ function BloggerData(o) {
           }
         })
         return BloggerData.getReact().then(function({ React, ReactDOM }) {
-          console.log('React', React)
-          console.log('ReactDOM', ReactDOM)
           const fn = typeof _fn === 'function' ? _fn : function() {}
           return fn({ React, ReactDOM })
         })
