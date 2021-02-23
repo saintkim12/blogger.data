@@ -2,7 +2,8 @@
 ;(function({ BloggerData }) {
   const bloggerData = BloggerData({
     css: {
-      highlight: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css'
+      highlight: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/default.min.css',
+      'highlight-markdown': 'https://bloggerdata.surge.sh/helloimnote/highlight.markdown.css'
     },
     libs: {
       highlight: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/highlight.min',
@@ -57,7 +58,7 @@
       const md = MarkdownIt()
       ;[...document.querySelectorAll('noscript.original-content')].forEach(el => {
         const innerHTML = el.innerHTML
-        el.nextElementSibling.innerHTML = innerHTML
+        el.parentElement.querySelector('.csr-content').innerHTML = innerHTML
         ;[...el.nextElementSibling.querySelectorAll('.markdown')].forEach(markdown => {
           const CodeBox = getCodeBox(markdown, { $, hljs, md })
           ReactDOM.render(React.createElement(CodeBox), markdown)

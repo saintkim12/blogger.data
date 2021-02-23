@@ -16,6 +16,11 @@ function BloggerData(o) {
       } else if (el.hasAttribute('data-loaded')) {
         resolve(el)
         return
+      } else {
+        console.warn(src, 'already loaded')
+        el.setAttribute('data-loaded', true)
+        resolve(el)
+        return
       }
 
       el.addEventListener('error', reject)
